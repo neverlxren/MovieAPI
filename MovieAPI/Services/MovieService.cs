@@ -56,13 +56,24 @@ public class MovieService: IMovieService
         return ToDto(movie);
     }
 
-    public async Task<MovieResponseDto> GetMovieByTitle(string title)
+    public async Task<IEnumerable<MovieResponseDto>> GetMovieByTitle(string title)
     {
-        var movie = await _movieDbContext.Movies.FindAsync(title);
+        var movies = await _movieDbContext.Movies
+            .Where(x => title == x.Title)
+            .Select(x => ToDto(x))
+            .ToListAsync();
+        
+        // Any, Find (pk), Single(), Where().ToList();, Single(), First()
+        
 
-        if (movie is null) return null;
+        return movies;
+    }
 
-        return ToDto(movie);
+    public async Task<IEnumerable<MovieResponseDto>> GetAllMovies()
+    {
+        var movies = await _movieDbContext.Movies.Select(x => ToDto(x)).ToListAsync();
+
+        return movies;
     }
 
     //---------Converter-----------

@@ -14,4 +14,6 @@ public interface IMovieService
         GetMoviesFiltered(string? genre, string? director, decimal? rating, string? country, short? releaseYear);
 
 
+    Task<IEnumerable<MovieResponseDto>> GetAllMovies();
+
 }
