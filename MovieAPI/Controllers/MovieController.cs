@@ -29,9 +29,13 @@ public class MovieController : ControllerBase
         return Ok(result);
         
     }
-    [HttpGet("view/movie/genre={genre}&director={director}&rating={rating}&country={country}&releaseYear={releaseYear}")]
-    public async Task<IActionResult> GetMoviesFiltred(string? genre, string? director, decimal? rating, string? country,
-        short? releaseYear)
+    [HttpGet("view/movie/filtered")]
+    public async Task<IActionResult> GetMoviesFiltered(
+        [FromQuery] string? genre,
+        [FromQuery] string? director,
+        [FromQuery] decimal? rating,
+        [FromQuery] string? country,
+        [FromQuery] short? releaseYear)
     {
         var result = await _movieService.GetMoviesFiltered(genre, director, rating, country, releaseYear);
 

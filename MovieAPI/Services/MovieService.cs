@@ -58,11 +58,15 @@ public class MovieService: IMovieService
 
     public async Task<IEnumerable<MovieResponseDto>> GetMovieByTitle(string title)
     {
+        title = title.Trim().ToLower();
         var movies = await _movieDbContext.Movies
-            .Where(x => title == x.Title)
+            .Where(x => x.Title.ToLower().Contains(title))
             .Select(x => ToDto(x))
             .ToListAsync();
         
+        // title "cars 2 "  == "cars 2"
+        
+        // title "the" == "the godfather"
         // Any, Find (pk), Single(), Where().ToList();, Single(), First()
         
 
