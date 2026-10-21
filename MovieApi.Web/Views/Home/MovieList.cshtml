@@ -1,0 +1,15 @@
+@model List<MovieViewModel> 
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+<ul>
+    @foreach (var item in Model)
+    {
+        <li> Title - @item.Title: Rating - @item.Rating, Release Year - @item.ReleaseYear</li>
+        
+}
+</ul>
